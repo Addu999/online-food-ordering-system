@@ -15,7 +15,7 @@ function Home({
 }) {
   const [foods, setFoods] = useState([]);
   useEffect(() => {
-  axios.get("http://localhost:5000/api/food/menu")
+  axios.get("https://online-food-ordering-system-f827.onrender.com")
     .then((res) => {
       setFoods(res.data);
     })
