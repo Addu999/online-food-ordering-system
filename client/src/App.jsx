@@ -1,6 +1,6 @@
 import Login from './components/Login';
 import Signup from './pages/Signup'; // 👈 Corrected import
-import Footer from "./components/Footer";
+import Footer from "./components/footer";
 import OrderSuccess from "./pages/OrderSuccess";
 import Cart from "./pages/Cart";
 import RestaurantMenu from "./pages/RestaurantMenu";
