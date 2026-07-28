@@ -1,18 +1,18 @@
 import Login from './components/Login';
-import Signup from './pages/Signup'; // 👈 Corrected import
+import Signup from './pages/Signup';
 import Footer from "./components/footer";
 import OrderSuccess from "./pages/OrderSuccess";
 import Cart from "./pages/Cart";
 import RestaurantMenu from "./pages/RestaurantMenu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Restaurants from "./pages/Restaurants";
 
 const handleLogout = () => {
-  localStorage.removeItem('token'); // Token delete
+  localStorage.removeItem('token');
   alert('Logged out successfully!');
-  window.location.href = '/login'; // Wapas login par bhej do
+  window.location.href = '/login';
 };
 
 function App() {
@@ -24,13 +24,39 @@ function App() {
     setCart(cart.filter((item) => item.id !== id));
   };
 
+  // 🛑 Fix for horizontal gap/overflow on mobile screens globally
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.innerHTML = `
+      html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   return (
     <>
       <Routes>
         {/* 🚀 Login and Signup Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/register" element={<Signup />} /> {/* Backup route */}
+        <Route path="/register" element={<Signup />} />
 
         <Route
           path="/"
@@ -80,4 +106,5 @@ function App() {
   );
 }
 
+App.jsx;
 export default App;
