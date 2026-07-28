@@ -12,7 +12,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       // Backend ke register route par request bhej rahe hain
-      const response = await axios.post('http://localhost:5001/api/auth/register', {
+      const response = await axios.post('https://online-food-ordering-system-1-awcy.onrender.com', {
         name,
         email,
         password

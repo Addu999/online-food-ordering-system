@@ -11,7 +11,7 @@ export default function Login() {
     e.preventDefault();
     try {
       // Backend login route
-      const res = await axios.post('http://localhost:5001/api/auth/login', { email, password });
+      const res = await axios.post('https://online-food-ordering-system-1-awcy.onrender.com', { email, password });
       
       // Token save kiya
       localStorage.setItem('token', res.data.token);

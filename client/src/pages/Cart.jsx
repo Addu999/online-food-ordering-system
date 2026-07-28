@@ -49,7 +49,7 @@ function Cart({ cart, removeFromCart }) {
         totalAmount: totalAmount
       };
 
-      await axios.post('http://localhost:5001/api/orders/place', orderData);
+      await axios.post('https://online-food-ordering-system-1-awcy.onrender.com', orderData);
 
       alert('🎉 Order Placed Successfully!');
       navigate("/success");
