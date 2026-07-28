@@ -24,7 +24,7 @@ function App() {
     setCart(cart.filter((item) => item.id !== id));
   };
 
-  // 🛑 Fix for horizontal gap/overflow on mobile screens globally
+  // Fix for horizontal gap/overflow on mobile screens globally
   useEffect(() => {
     const style = document.createElement('style');
     style.innerHTML = `
@@ -53,7 +53,7 @@ function App() {
   return (
     <>
       <Routes>
-        {/* 🚀 Login and Signup Routes */}
+        {/* Login and Signup Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/register" element={<Signup />} />
@@ -106,5 +106,4 @@ function App() {
   );
 }
 
-App.jsx;
 export default App;
