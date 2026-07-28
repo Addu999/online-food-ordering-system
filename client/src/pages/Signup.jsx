@@ -11,8 +11,8 @@ const Signup = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      // Backend ke register route par request bhej rahe hain
-      const response = await axios.post('https://online-food-ordering-system-1-awcy.onrender.com', {
+      // Backend ke register route par request bhej rahe hain (Sahi endpoint ke sath)
+      const response = await axios.post('https://online-food-ordering-system-1-awcy.onrender.com/api/auth/register', {
         name,
         email,
         password
