@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Register = () => {
+const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,23 +12,25 @@ const Register = () => {
     e.preventDefault();
     try {
       // Backend ke register route par request bhej rahe hain
-      await axios.post('http://localhost:5001/api/auth/register', {
+      const response = await axios.post('http://localhost:5001/api/auth/register', {
         name,
         email,
         password
       });
+      console.log('Success:', response.data);
       alert('Registration Successful! Please Login.');
-      navigate('/login'); // Register hone ke baad login page par bhej do
+      navigate('/login'); 
     } catch (error) {
-      console.error(error);
-      alert('Registration Failed. Try again!');
+      console.error('Registration Error Details:', error);
+      const errorMsg = error.response?.data?.message || error.message || 'Unknown error';
+      alert(`Registration Failed: ${errorMsg}`);
     }
   };
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', backgroundColor: '#111', color: '#fff' }}>
       <form onSubmit={handleRegister} style={{ background: '#222', padding: '30px', borderRadius: '10px', width: '300px' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Register</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Sign Up</h2>
         
         <div style={{ marginBottom: '15px' }}>
           <label>Name:</label>
@@ -75,4 +77,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Signup;
