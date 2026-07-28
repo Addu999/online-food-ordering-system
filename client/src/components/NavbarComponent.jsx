@@ -12,11 +12,24 @@ function Navbar() {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
+            box-sizing: border-box;
           }
           .navbar-links {
             display: flex;
             gap: 20px;
             align-items: center;
+          }
+          .cart-btn {
+            background-color: white;
+            color: #ff4d4d;
+            padding: 6px 14px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
           }
           /* 📱 मोबाइल स्क्रीन के लिए (जब स्क्रीन 600px से छोटी होगी) */
           @media (max-width: 600px) {
@@ -29,7 +42,7 @@ function Navbar() {
               width: 100%;
               justify-content: center;
               flex-wrap: wrap;
-              gap: 10px;
+              gap: 12px;
             }
           }
         `}
@@ -42,9 +55,16 @@ function Navbar() {
           <Link to="/" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>
             Home
           </Link>
+          
+          {/* 🛒 Cart Button Added Here */}
+          <Link to="/cart" className="cart-btn">
+            🛒 Cart
+          </Link>
+
           <Link to="/login" style={{ color: "white", textDecoration: "none", fontWeight: "bold" }}>
             Login
           </Link>
+
           <Link 
             to="/register" 
             style={{ 
