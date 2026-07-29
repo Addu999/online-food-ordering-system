@@ -4,7 +4,7 @@ const cors = require("cors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Menu = require("./models/Menu");
-const Order = require("./models/Order"); // 👈 Order Model Import kiya
+const Order = require("./models/Order");
 
 const app = express();
 
@@ -12,9 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 const dns = require('dns');
-dns.setServers(['8.8.8.8', '1.1.1.1']); // Google aur Cloudflare ka DNS use karega jo DNS block hata dega
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
-// MongoDB Connection (Cloud Atlas URL Set)
+// MongoDB Connection
 const dbURI = "mongodb+srv://addu9822_db_user:addu9822@cluster0.mddanxq.mongodb.net/foodOrderingSystem?retryWrites=true&w=majority";
 
 mongoose
@@ -26,7 +26,6 @@ mongoose
 // 1. SCHEMAS (DATABASE STRUCTURE)
 // ==========================================
 
-// Food Schema
 const foodItemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
@@ -35,7 +34,6 @@ const foodItemSchema = new mongoose.Schema({
 });
 const FoodItem = mongoose.model("FoodItem", foodItemSchema);
 
-// User Schema
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
@@ -65,13 +63,13 @@ app.post("/api/auth/register", async (req, res) => {
     user.password = await bcrypt.hash(password, salt);
     await user.save();
 
-    const payload = { user: { id: user.id, role: user.role } };
+    const payload = { user: { id: user._id, role: user.role } };
     jwt.sign(payload, "mySecretTokenKey", { expiresIn: "1d" }, (err, token) => {
       if (err) throw err;
       res.status(201).json({
         message: "User registered successfully!",
         token,
-        user: { id: user.id, name: user.name, email: user.email, role: user.role }
+        user: { id: user._id, name: user.name, email: user.email, role: user.role }
       });
     });
   } catch (err) {
@@ -94,13 +92,13 @@ app.post("/api/auth/login", async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ error: "Invalid Credentials (Password galat hai)" });
     }
-    const payload = { user: { id: user.id, role: user.role } };
+    const payload = { user: { id: user._id, role: user.role } };
     jwt.sign(payload, "mySecretTokenKey", { expiresIn: "1d" }, (err, token) => {
       if (err) throw err;
       res.json({
         message: "Login successful!",
         token,
-        user: { id: user.id, name: user.name, email: user.email, role: user.role }
+        user: { id: user._id, name: user.name, email: user.email, role: user.role }
       });
     });
   } catch (err) {
