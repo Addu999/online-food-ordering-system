@@ -49,7 +49,8 @@ function Cart({ cart, removeFromCart }) {
         totalAmount: totalAmount
       };
 
-      await axios.post('https://online-food-ordering-system-1-awcy.onrender.com', orderData);
+      // Yahan endpoint correct kar diya hai (/api/orders/place jod diya hai)
+      await axios.post('https://online-food-ordering-system-1-awcy.onrender.com/api/orders/place', orderData);
 
       alert('🎉 Order Placed Successfully!');
       navigate("/success");
